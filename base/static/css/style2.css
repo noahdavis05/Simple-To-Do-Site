@@ -1,0 +1,153 @@
+body {
+    background-color: #121212;
+    color: #edf2f4;
+    font-family: Helvetica, sans-serif;
+}
+
+input {
+    background-color: #181818;
+    padding: 5px;
+    color: #edf2f4;
+    box-shadow: none !important;
+    border-radius: 5px;
+    border-color:#181818;
+    border-style: solid;
+    
+    
+}
+
+button {
+    background-color: #BD93F9;
+    padding: 5px;
+    color: #121212;
+    border-radius: 5px;
+    margin-left: 10px;
+    border-color:#BD93F9;
+    border-style: solid;
+    float: right;
+    transition: background-color 0.1s;
+    transition: border-color 0.1s;
+}
+
+button:hover {
+    background-color: #121212;
+    border-color:#121212;
+    color: #edf2f4;
+}
+
+
+
+
+
+#tasks {
+    background-color: #121212;
+    padding: 1%;
+
+    border-radius: 5px;
+    width: 98%;
+
+    border-color:#121212;
+    border-style: solid;
+    display: inline-flex;
+    float: center;
+    align-items: flex-start;
+}
+
+.column {
+    top:0;
+    width: 50%;
+}
+
+
+.task {
+    background-color: #181818;
+    padding: 5px;
+
+    border-radius: 5px;
+    margin: 10px;
+    border-color:#181818;
+    border-style: solid;
+    display: flex;
+
+    
+}
+
+.task2 {
+    background-color: #181818;
+    padding: 5px;
+
+    border-radius: 5px;
+    margin: 10px;
+    border-color:#181818;
+    border-style: solid;
+    display: flex;
+    width:80%;
+
+    
+}
+
+
+
+.text {
+    flex: 3;
+    padding: 10px;
+    overflow-wrap: break-word; /* Handles word wrapping for normal content */
+    word-wrap: break-word; /* Older versions of browsers may use this property */
+    word-break: break-word; /* Handles word breaking for long words */
+}
+
+.buttons {
+    flex: 1;
+    padding: 10px;
+    display: flex; 
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#topBar {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    width: 98%;
+
+    background-color: #181818;
+    border-radius: 5px;
+
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+#welcome {
+    width: 80%;
+    padding: 10px;
+    
+}
+
+#logOut {
+    width: 20%;
+    padding: 10px;
+}
+
+a {
+    float: right;
+    margin-right: 0px;
+}
+
+#tasks2{
+    background-color: #121212;
+    padding: 1%;
+    border-radius: 5px;
+    width: 98%;
+    border-color:#121212;
+    border-style: solid;
+
+
+}
+

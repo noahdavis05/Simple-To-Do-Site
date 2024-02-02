@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login Registration Demo</title>
+
+ <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+
+<body>
+    <div id="topBar">
+        <div id="welcome">
+            <h1 style="float:left ;">Hi {{user}}</h1>
+        </div>
+        
+        <div id="links">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="logOut" value="logOut">Log out</button>
+                <button type="submit" name="home" value="home">To do list</button>
+                <button type="submit" name="shopping" value="shopping">Shopping list</button>
+                
+            </form>
+
+
+        </div>
+    </div>
+
+    <div id="tasks2">
+        <div id="top">
+            <h2>Shopping list</h2><br>
+            <form method="post">
+                {% csrf_token %}
+                <div style="display: flex; align-items: center; padding: 5px; padding-left: 10px;">
+                    <input type="text" name="new">
+                    <button type="submit" name="newItem" value="newItem">add item</button>
+                </div>
+            </form>
+        </div><br>
+
+        {% for item in ls.item_set.all %}
+            {% if item.complete == False %}
+                <div class="task">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="text">
+                            {{item.text}}
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" name="end" value="{{item.id}}">Remove</button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+
+
+
+</body>

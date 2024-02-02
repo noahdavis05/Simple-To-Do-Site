@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Login Registration Demo</title>
+
+ <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+
+<body>
+    <div id="topBar">
+        <div id="welcome">
+            <h1 style="float:left ;">Hi {{user}}</h1>
+        </div>
+        
+        <div id="links">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="logOut" value="logOut">Log out</button>
+                <button type="submit" name="home" value="home">To do list</button>
+                <button type="submit" name="shopping" value="shopping">Shopping list</button>
+                
+            </form>
+
+
+        </div>
+    </div>
+
+    <div id="tasks">
+        <div class="column">
+            <h2>to do</h2>
+            <form method="post" action="">
+                {% csrf_token %}
+                <div style="display: flex; align-items: center; padding: 5px; padding-left: 10px;">
+                    <input type="text" name="new">
+                    <button type="submit" name="newItem" value="newItem">add item</button>
+                </div>
+            </form>
+        
+
+
+
+    
+        
+            {% for item in ls.item_set.all %}
+                {% if item.complete == False%}
+                    <div class="task">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <p>
+                                <div class="text">
+                                    {{item.text}}
+                                </div>
+                                <div class="buttons">
+                                    <button type="submit" name="prog" value="{{item.id}}">Progress task</button>
+                                    <button type="submit" name="end" value="{{item.id}}">End task</button>
+                                </div>
+                                
+                            </p>                   
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="column">
+            <h2 style="margin-bottom: 70px;">in progress</h2>
+            {% for item in ls.item_set.all %}
+                {% if item.complete == True%}
+                    <div class="task">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <p>
+                                <div class="text">
+                                    {{item.text}}
+                                </div>
+                                <div class="buttons">
+                                    <button type="submit" name="endProg" value="{{item.id}}">End task</button>
+                                </div>
+                            </p>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
