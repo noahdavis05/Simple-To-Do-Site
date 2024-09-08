@@ -2,63 +2,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Login Registration Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
 
- <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom inline styles for buttons -->
+    <style>
+        body {
+            background-color: #121212;
+            color: #edf2f4;
+        }
+
+        .btn-purple {
+            background-color: #BD93F9 !important;
+            color: #121212 !important;
+            border-color: #BD93F9 !important;
+        }
+
+        .btn-purple:hover {
+            background-color: #121212 !important;
+            color: #edf2f4 !important;
+            border-color: #edf2f4 !important;
+        }
+
+        .navbar, .task, #topBar {
+            background-color: #181818;
+        }
+
+        .container {
+            background-color: #121212;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #edf2f4;
+        }
+
+        li {
+            padding:10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="topBar">
-        <div id="welcome">
-            <h1 style="float:left ;">Hi {{user}}</h1>
+
+    <!-- Navbar / Top Bar -->
+    <nav id="topBar" class="navbar navbar-expand-lg navbar-dark p-3">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <h1 class="mb-0">Hi {{ user }}</h1>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-purple" name="logOut" value="logOut">Log out</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-purple" name="home" value="home">To-do list</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-        <div id="links">
-            <form method="post">
-                {% csrf_token %}
-                <button type="submit" name="logOut" value="logOut">Log out</button>
-                <button type="submit" name="home" value="home">To do list</button>
-                <button type="submit" name="shopping" value="shopping">Shopping list</button>
-                
-            </form>
+    </nav>
 
-
-        </div>
-    </div>
-
-    <div id="tasks2">
-        <div id="top">
-            <h2>Shopping list</h2><br>
-            <form method="post">
-                {% csrf_token %}
-                <div style="display: flex; align-items: center; padding: 5px; padding-left: 10px;">
-                    <input type="text" name="new">
-                    <button type="submit" name="newItem" value="newItem">add item</button>
-                </div>
-            </form>
-        </div><br>
-
-        {% for item in ls.item_set.all %}
-            {% if item.complete == False %}
-                <div class="task">
-                    <form method="post">
+    <!-- Shopping List Section -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="mb-4 text-center">
+                    <h2>Shopping List</h2>
+                    <form method="post" class="d-flex gap-2 justify-content-center">
                         {% csrf_token %}
-                        <div class="text">
-                            {{item.text}}
-                        </div>
-                        <div class="buttons">
-                            <button type="submit" name="end" value="{{item.id}}">Remove</button>
-                        </div>
+                        <input type="text" name="new" class="form-control" placeholder="Add new item" style="background-color: #181818; color: #edf2f4; border-color: #181818;">
+                        <button type="submit" class="btn btn-purple" name="newItem" value="newItem">Add Item</button>
                     </form>
                 </div>
-            {% endif %}
-        {% endfor %}
 
+                <!-- List of Items -->
+                <div>
+                    {% for item in ls.item_set.all %}
+                        {% if not item.complete %}
+                            <div class="task d-flex justify-content-between align-items-center p-2 mb-2 border rounded">
+                                <div class="text">
+                                    {{ item.text }}
+                                </div>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-purple" name="end" value="{{ item.id }}">Remove</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+</html>
